@@ -37,6 +37,14 @@ class CompanyCreate(CompanyBase):
     pass
 
 
+class CompanyUpdate(BaseModel):
+    """
+    Pydantic model for updating an existing company.
+    All fields are optional to allow partial updates.
+    """
+    companyName: Optional[str] = Field(None, example="Updated Name Inc.", description="Updated name of the company")
+    companyURL: Optional[HttpUrl] = Field(None, example="https://updated-acme.com", description="Updated company website URL")
+
 class CompanyResponse(CompanyBase):
     """Pydantic model for company response that includes the ID"""
     companyId: int = Field(..., example=1, description="Unique identifier for the company")

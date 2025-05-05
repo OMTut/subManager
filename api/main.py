@@ -12,6 +12,8 @@ from models.company import Company
 # Import routers
 from routes.companies.get_all_companies_route import router as get_all_companies_router
 from routes.companies.add_company_route import router as add_company_router
+from routes.companies.update_company_route import router as update_company_router
+from routes.companies.delete_company_route import router as delete_company_router
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -27,6 +29,8 @@ app = FastAPI(
 # Include routers
 app.include_router(get_all_companies_router)
 app.include_router(add_company_router)
+app.include_router(update_company_router)
+app.include_router(delete_company_router)
 
 
 if __name__ == "__main__":

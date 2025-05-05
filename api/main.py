@@ -1,36 +1,32 @@
-from typing import Union
+from typing import Union, List
 import uvicorn
-from fastapi import FastAPI
-from services.db.connect_to_db import connect
+import logging
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
 
-app = FastAPI()
+# Import database components
+from services.db.connect_to_db import get_db
+from models.company import Company
 
-connection = connect()
+# Import routers
+from routes.companies.get_all_companies_route import router as get_all_companies_router
+from routes.companies.add_company_route import router as add_company_router
 
-@app.get("/")
-def read_root():
-    if connection:
-        # Create a cursor object using the connection
-        cursor = connection.cursor()
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-        # Example query: Select all from a table
-        cursor.execute("SELECT * FROM company")
+# Create FastAPI app
+app = FastAPI(
+    title="Subscription Manager API",
+    description="API for managing subscriptions",
+    version="1.0.0"
+)
 
-        # Fetch all rows from the query
-        rows = cursor.fetchall()
-        for row in rows:
-            print(row)
-
-        # Close the cursor and connection
-        cursor.close()
-        connection.close()
-
-        return rows
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+# Include routers
+app.include_router(get_all_companies_router)
+app.include_router(add_company_router)
 
 
 if __name__ == "__main__":

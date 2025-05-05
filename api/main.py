@@ -7,13 +7,20 @@ from sqlalchemy.exc import SQLAlchemyError
 
 # Import database components
 from services.db.connect_to_db import get_db
-from models.company import Company
+# from models.company import Company
+# from models.user import User
 
 # Import routers
 from routes.companies.get_all_companies_route import router as get_all_companies_router
 from routes.companies.add_company_route import router as add_company_router
 from routes.companies.update_company_route import router as update_company_router
 from routes.companies.delete_company_route import router as delete_company_router
+from routes.companies.get_company_by_id_route import router as get_company_by_id_router
+from routes.users.get_all_users_route import router as get_all_user_router
+from routes.users.add_user_route import router as add_user_router
+from routes.users.update_user_route import router as update_user_router
+from routes.users.delete_user_route import router as delete_user_router
+from routes.users.get_user_by_id_route import router as get_user_by_id_router
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -31,6 +38,12 @@ app.include_router(get_all_companies_router)
 app.include_router(add_company_router)
 app.include_router(update_company_router)
 app.include_router(delete_company_router)
+app.include_router(get_company_by_id_router)
+app.include_router(get_all_user_router)
+app.include_router(add_user_router)
+app.include_router(update_user_router)
+app.include_router(delete_user_router)
+app.include_router(get_user_by_id_router)
 
 
 if __name__ == "__main__":

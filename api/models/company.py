@@ -50,4 +50,6 @@ class CompanyResponse(CompanyBase):
     companyId: int = Field(..., example=1, description="Unique identifier for the company")
     
     class Config:
-        orm_mode = True
+        model_config = {
+        "from_attributes": True
+    }

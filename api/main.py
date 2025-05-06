@@ -21,6 +21,8 @@ from routes.users.add_user_route import router as add_user_router
 from routes.users.update_user_route import router as update_user_router
 from routes.users.delete_user_route import router as delete_user_router
 from routes.users.get_user_by_id_route import router as get_user_by_id_router
+from routes.categories.get_all_categories_route import router as get_all_categories_router
+from routes.categories.get_category_by_id_route import router as get_category_by_id_router
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -44,6 +46,8 @@ app.include_router(add_user_router)
 app.include_router(update_user_router)
 app.include_router(delete_user_router)
 app.include_router(get_user_by_id_router)
+app.include_router(get_all_categories_router)
+app.include_router(get_category_by_id_router)
 
 
 if __name__ == "__main__":

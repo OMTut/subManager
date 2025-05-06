@@ -29,12 +29,12 @@ class CategoryBase(BaseModel):
     categoryName: str = Field(..., example="Acme Inc.", description="Name of the category")
 
 
-class UserCreate(CategoryBase):
+class CategoryCreate(CategoryBase):
     """Pydantic model for creating a new category"""
     pass
 
 
-class UserUpdate(BaseModel):
+class CategoryUpdate(BaseModel):
     """
     Pydantic model for updating an existing category.
     All fields are optional to allow partial updates.

@@ -10,22 +10,33 @@ from services.db.connect_to_db import get_db
 # from models.company import Company
 # from models.user import User
 
-# Import routers
+# Import routers - Companies
 from routes.companies.get_all_companies_route import router as get_all_companies_router
 from routes.companies.add_company_route import router as add_company_router
 from routes.companies.update_company_route import router as update_company_router
 from routes.companies.delete_company_route import router as delete_company_router
 from routes.companies.get_company_by_id_route import router as get_company_by_id_router
+
+# Import routers - Users
 from routes.users.get_all_users_route import router as get_all_user_router
 from routes.users.add_user_route import router as add_user_router
 from routes.users.update_user_route import router as update_user_router
 from routes.users.delete_user_route import router as delete_user_router
 from routes.users.get_user_by_id_route import router as get_user_by_id_router
+
+# Import routers - Categories
 from routes.categories.get_all_categories_route import router as get_all_categories_router
 from routes.categories.get_category_by_id_route import router as get_category_by_id_router
 from routes.categories.add_category_route import router as add_category_router
 from routes.categories.update_category_route import router as update_category_router
 from routes.categories.delete_category_route import router as delete_category_router
+
+# Import routers - Subscriptions
+from routes.subscriptions.get_all_subscriptions_route import router as get_all_subscriptions_router
+from routes.subscriptions.get_subscription_by_id_route import router as get_subscription_by_id_router
+from routes.subscriptions.add_subscription_route import router as add_subscription_router
+from routes.subscriptions.update_subscription_route import router as update_subscription_router
+from routes.subscriptions.delete_subscription_route import router as delete_subscription_router
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -54,6 +65,11 @@ app.include_router(get_category_by_id_router)
 app.include_router(add_category_router)
 app.include_router(update_category_router)
 app.include_router(delete_category_router)
+app.include_router(get_all_subscriptions_router)
+app.include_router(get_subscription_by_id_router)
+app.include_router(add_subscription_router)
+app.include_router(update_subscription_router)
+app.include_router(delete_subscription_router)
 
 
 if __name__ == "__main__":

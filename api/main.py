@@ -2,6 +2,7 @@ from typing import Union, List
 import uvicorn
 import logging
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -47,6 +48,15 @@ app = FastAPI(
     title="Subscription Manager API",
     description="API for managing subscriptions",
     version="1.0.0"
+)
+
+# Configure CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Vite default development server
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allow all headers
 )
 
 # Include routers

@@ -31,8 +31,8 @@ async def read_subscriptions(db: Session = Depends(get_db)):
                 "price": subscription.price,
                 "category": subscription.subscriptionCategory,
                 "description": subscription.description,
-                "account holder": subscription.userName,
-                "account email": subscription.emailAssociated
+                "account_holder": subscription.userName,
+                "account_email": subscription.emailAssociated
             } 
             for subscription in subscriptions
         ]

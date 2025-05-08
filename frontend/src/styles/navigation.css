@@ -1,0 +1,25 @@
+nav ul {
+    padding: 0;
+    margin:0;
+}
+
+nav li {
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+    margin:0;
+}
+
+nav a {
+    display: block;
+    margin:0;
+    padding: 10px;
+    font-weight: bold;
+    color: black;
+    background-color: gainsboro;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color:darkgray;
+}

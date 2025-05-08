@@ -1,4 +1,4 @@
-
+# Python ignores
 __init__.py
 
 # Ignore virtual environment directory
@@ -19,3 +19,38 @@ site-packages/
 
 # Ignore hefty model files
 /api/app/model/
+
+# Frontend (Vite + React) ignores
+# Dependencies
+frontend/node_modules
+
+# Build outputs
+frontend/dist
+frontend/build
+
+# Environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs and debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+frontend/logs
+
+# Testing and coverage
+frontend/coverage
+frontend/.nyc_output
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,55 @@
+body {
+    margin:0;
+}
+.container {
+    display: grid;
+    grid-template-areas: 
+        "header header header"
+        "lc rc rc"
+        "footer footer footer";
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    gap: 10px;
+}
+
+header {
+    grid-area: header;
+    background: #282c34;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    grid-area: footer;
+    background: #282c34;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.left-column {
+    grid-area: lc;
+    background: #f4f4f4;
+    padding: 10px;
+}
+
+.right-column {
+    grid-area: rc;
+    background: #f4f4f4;
+    padding: 10px;
+}
+
+.delete-button:hover {
+    background-color:red;
+    outline: none;
+}
+
+.add-button {
+    margin-bottom:20px;
+}
+
+td {
+    padding-right: 20px;
+}

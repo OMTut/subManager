@@ -10,7 +10,7 @@
  *  * @param {string} [props.subscription.account_email] - account holder of the subscription (optional)
  * @returns {JSX.Element} subscription card component
  */
-
+import DetailsButton from "../Buttons/DetailsButton"
 
 const SubscriptionCard = ({ subscription, refresh, showMessage }) => {
     return (
@@ -20,6 +20,13 @@ const SubscriptionCard = ({ subscription, refresh, showMessage }) => {
             <td>{subscription.category || 'N/A'}</td>
             <td>{subscription.account_holder || 'N/A'}</td>
             <td>{subscription.account_email || 'N/A'}</td>
+            <td>
+                <DetailsButton 
+                    subscription={subscription} 
+                    showMessage={showMessage}
+                    refresh={refresh}
+                />
+            </td>
         </tr>
     );
 };

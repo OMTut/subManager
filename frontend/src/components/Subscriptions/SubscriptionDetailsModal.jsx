@@ -14,10 +14,7 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
         account: subscription.account
     })
 
-    const handleStatusChange = (updatedSubscription) => {
-        // Update local state with the received updated subscription
-        setSubscriptionData(updatedSubscription);
-    }
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;

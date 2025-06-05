@@ -15,9 +15,9 @@ const AddSubscriptionButton = ({ onSubAdd }) => {
         <>
             <button
                 onClick = { handleClick }
-                className="add-button"
+                className="btn btn-primary add-button"
             >
-                Add Subscription
+                + Add Subscription
             </button>
             {showModal && (
                 <AddSubscriptionModal

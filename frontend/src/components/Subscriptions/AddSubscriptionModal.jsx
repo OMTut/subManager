@@ -49,35 +49,101 @@ const AddSubscriptionModal = ({ onClose, onSubAdd }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Add Subscription</h2>
+                <div className="modal-close">
+                    <button 
+                        type="button"
+                        className="modal-close-button"
+                        onClick={onClose}
+                        aria-label="Close modal"
+                    >×
+                    </button>
+                </div>
+                
+                <div className="modal-header">
+                    <h2>Add New Subscription</h2>
+                </div>
+                
                 {error && <div className="error-message">{error}</div>}
+                
                 <form onSubmit={handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} required />
-                    </label>
-                    <label>
-                        Price:
-                        <input type="number" step="0.01" min="0" name="price" value={formData.price} onChange={handleChange} required />
-                    </label>
-                    <label>
-                        Category:
-                        <input type="text" name="subscriptionCategory" value={formData.subscriptionCategory} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Description:
-                        <input type="textarea" name="description" value={formData.description} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Account Holder:
-                        <input type="text" name="userName" value={formData.userName} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Account Email:
-                        <input type="email" name="emailAssociated" value={formData.emailAssociated} onChange={handleChange} />
-                    </label>
-                    <button type="submit">Add Subscription</button>
-                    <button type="button" onClick={onClose}>Cancel</button>
+                    <div className="form-group">
+                        <label htmlFor="companyName">Company Name:</label>
+                        <input 
+                            type="text" 
+                            id="companyName"
+                            name="companyName" 
+                            value={formData.companyName} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="price">Price:</label>
+                        <input 
+                            type="number" 
+                            step="0.01" 
+                            min="0" 
+                            id="price"
+                            name="price" 
+                            value={formData.price} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="subscriptionCategory">Category:</label>
+                        <input 
+                            type="text" 
+                            id="subscriptionCategory"
+                            name="subscriptionCategory" 
+                            value={formData.subscriptionCategory} 
+                            onChange={handleChange} 
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="description">Description:</label>
+                        <textarea 
+                            id="description"
+                            name="description" 
+                            value={formData.description} 
+                            onChange={handleChange}
+                            rows="3"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="userName">Account Holder:</label>
+                        <input 
+                            type="text" 
+                            id="userName"
+                            name="userName" 
+                            value={formData.userName} 
+                            onChange={handleChange} 
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="emailAssociated">Account Email:</label>
+                        <input 
+                            type="email" 
+                            id="emailAssociated"
+                            name="emailAssociated" 
+                            value={formData.emailAssociated} 
+                            onChange={handleChange} 
+                        />
+                    </div>
+                    
+                    <div className="form-actions">
+                        <button type="button" className="cancel-button" onClick={onClose}>
+                            Cancel
+                        </button>
+                        <button type="submit" className="save-button" disabled={isLoading}>
+                            {isLoading ? 'Adding...' : 'Add Subscription'}
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

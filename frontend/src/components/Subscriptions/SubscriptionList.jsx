@@ -26,24 +26,46 @@ const AllSubscriptionsList = () => {
         return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
     });
 
+    // Calculate dashboard stats
+    const totalSubscriptions = subscriptions.length;
+    const totalCost = subscriptions.reduce((sum, sub) => sum + (parseFloat(sub.price) || 0), 0);
+
     return (
-        <div className="subscription-container">
+        <>
             <MessageAlert 
                 message={message} 
                 messageType={messageType} 
                 onClear={clearMessage}
             />
-            <AddSubscriptionButton onSubAdd={handleSubscriptionAdded} />
-            <table className="subscription-list">
-                <thead>
-                    <tr>
-                        <th>Subscription</th>
-                        <th>Price</th>
-                        <th>Category</th>
-                        <th>Account Holder</th>
-                        <th>Account Email</th>
-                    </tr>
-                </thead>
+            
+            {/* Dashboard Stats */}
+            <div className="dashboard-stats">
+                <div className="stat-card">
+                    <h3>Monthly Cost</h3>
+                    <p className="stat-value">${totalCost.toFixed(2)}</p>
+                </div>
+                <div className="stat-card">
+                    <h3>Total Subscriptions</h3>
+                    <p className="stat-value">{totalSubscriptions}</p>
+                </div>
+            </div>
+
+            <div className="subscription-container">
+                <div className="subscription-container-header">
+                    <h2>Your Subscriptions</h2>
+                    <AddSubscriptionButton onSubAdd={handleSubscriptionAdded} />
+                </div>
+                <table className="subscription-list">
+                    <thead>
+                        <tr>
+                            <th>Subscription</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Account Holder</th>
+                            <th>Account Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                 <tbody>
                     {
                     sortedSubscriptions.map(subscription => (
@@ -52,8 +74,9 @@ const AllSubscriptionsList = () => {
                     }
                 </tbody>
 
-            </table>
-        </div>
+                </table>
+            </div>
+        </>
     );
 };
 

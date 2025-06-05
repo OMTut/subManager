@@ -1,7 +1,7 @@
 function Header() {
     return (
        <header>
-          <h1>The Tuttle's Family Hub</h1>
+          <h1>The Tuttle's Subscriptions Hub</h1>
        </header>
     );
  }

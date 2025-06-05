@@ -3,8 +3,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel, HttpUrl, Field
 from typing import Optional
-
-Base = declarative_base()
+from services.db.connect_to_db import Base
 
 class Company(Base):
     """

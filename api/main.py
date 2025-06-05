@@ -53,7 +53,7 @@ app = FastAPI(
 # Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default development server
+    allow_origins=["http://localhost", "http://localhost:5173"],  # Allow frontend URLs
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, PUT, DELETE, etc.)
     allow_headers=["*"],  # Allow all headers
@@ -80,6 +80,17 @@ app.include_router(get_subscription_by_id_router)
 app.include_router(add_subscription_router)
 app.include_router(update_subscription_router)
 app.include_router(delete_subscription_router)
+
+# Health check endpoint for Kubernetes
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for load balancers and Kubernetes probes."""
+    return {"status": "healthy", "service": "subscription-manager-api"}
+
+@app.get("/")
+async def root():
+    """Root endpoint."""
+    return {"message": "Subscription Manager API", "version": "1.0.0"}
 
 
 if __name__ == "__main__":

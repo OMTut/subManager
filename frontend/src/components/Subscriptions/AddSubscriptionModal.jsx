@@ -25,7 +25,12 @@ const AddSubscriptionModal = ({ onClose, onSubAdd }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const newSubscription = await handleAddSubscritpion(formData);
+            // Convert price to float to preserve decimal values
+            const submitData = {
+                ...formData,
+                price: parseFloat(formData.price)
+            };
+            const newSubscription = await handleAddSubscritpion(submitData);
             onSubAdd(newSubscription);
             setFormData({
                 companyName: '',
@@ -53,7 +58,7 @@ const AddSubscriptionModal = ({ onClose, onSubAdd }) => {
                     </label>
                     <label>
                         Price:
-                        <input type="text" name="price" value={formData.price} onChange={handleChange} required />
+                        <input type="number" step="0.01" min="0" name="price" value={formData.price} onChange={handleChange} required />
                     </label>
                     <label>
                         Category:

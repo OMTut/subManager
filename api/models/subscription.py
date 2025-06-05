@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Text, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Text, Float, ForeignKey, DECIMAL
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel, HttpUrl, Field, EmailStr
@@ -23,7 +23,7 @@ class Subscription(Base):
     
     subscriptionID = Column(Integer, primary_key=True, index=True)
     companyName = Column(String, nullable=False)
-    price = Column(Float, nullable=False)
+    price = Column(DECIMAL(10, 2), nullable=False)  # 10 digits total, 2 decimal places
     subscriptionCategory = Column(String, nullable=True)
     description = Column(Text, nullable=True)
     userName = Column(String, nullable=True)

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { updateSubscription } from '../../services/updateSubscription';
 import DeleteButton from '../Buttons/DeleteButton';
 import '../../styles/detailsSubscriptionsModal.css';
 
@@ -8,10 +9,12 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
     const [originalSubscription] = useState(subscription);
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-        name: subscription.name,
+        companyName: subscription.name,
         price: subscription.price,
-        category: subscription.category,
-        account: subscription.account
+        subscriptionCategory: subscription.category,
+        description: subscription.description,
+        userName: subscription.account_holder,
+        emailAssociated: subscription.account_email
     })
 
 
@@ -27,7 +30,12 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateSubscription(subscription.account, formData);
+            // Convert price to float to preserve decimal values
+            const submitData = {
+                ...formData,
+                price: parseFloat(formData.price)
+            };
+            await updateSubscription(subscription.id, submitData);
             setIsEditing(false);
             setSubscriptionData(formData);
             if (refresh) refresh();
@@ -70,12 +78,12 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
                 {isEditing ? (
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="name">Name:</label>
+                            <label htmlFor="companyName">Name:</label>
                             <input
                                 type="text"
                                 id="name"
-                                name="name"
-                                value={formData.name}
+                                name="companyName"
+                                value={formData.companyName}
                                 onChange={handleChange}
                                 required
                             />
@@ -83,7 +91,9 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
                         <div className="form-group">
                             <label htmlFor="price">Price:</label>
                             <input
-                                type="text"
+                                type="number"
+                                step="0.01"
+                                min="0"
                                 id="price"
                                 name="price"
                                 value={formData.price}
@@ -92,22 +102,43 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="category">Category:</label>
+                            <label htmlFor="subscriptionCategory">Category:</label>
                             <input
                                 type="text"
-                                id="category"
-                                name="category"
-                                value={formData.category}
+                                id="subscriptionCategory"
+                                name="subscriptionCategory"
+                                value={formData.subscriptionCategory}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="account">Account:</label>
+                            <label htmlFor="description">Description:</label>
                             <input
                                 type="text"
-                                id="account"
-                                name="account"
-                                value={formData.account_holder}
+                                id="description"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="userName">Account Holder:</label>
+                            <input
+                                type="text"
+                                id="userName"
+                                name="userName"
+                                value={formData.userName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="emailAssociated">Account Email:</label>
+                            <input
+                                type="text"
+                                id="emailAssociated"
+                                name="emailAssociated"
+                                value={formData.emailAssociated}
                                 onChange={handleChange}
                                 required
                             />
@@ -133,6 +164,7 @@ const SubscriptionDetailsModal = ({ subscription, onClose, onUpdate, onDelete, r
                             <p><strong>Category:</strong> {subscriptionData.category}</p>
                             <p><strong>Account:</strong> {subscriptionData.account_holder}</p>
                             <p><strong>Email:</strong> {subscriptionData.account_email}</p>
+                            <p><strong>Description:</strong> {subscriptionData.description}</p>
                         </div>
                         <div className='subscription-operations'>
                             <button 

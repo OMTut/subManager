@@ -3,6 +3,7 @@ const API_URL = import.meta.env.VITE_API_BASE_URL;
 export const addSubscription = async (subscriptionData) => {
     try {
         console.log('Adding subscription with data:', subscriptionData);
+        console.log('Price type:', typeof subscriptionData.price, 'Price value:', subscriptionData.price);
         const response = await fetch(`${API_URL}/subscriptions`, {
             method: 'POST',
             headers: {

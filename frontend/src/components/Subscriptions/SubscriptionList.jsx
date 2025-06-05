@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useGetAllSubscriptions } from '../../hooks/useGetAllSubscriptions';
 import SubscriptionCard from './SubscriptionCard';
-
+import AddSubscriptionButton from '../Buttons/AddSubscriptionButton';
 import MessageAlert from '../MessageAlert';
 import useMessageAlert from '../../hooks/useMessageAlert'
 
@@ -33,7 +33,7 @@ const AllSubscriptionsList = () => {
                 messageType={messageType} 
                 onClear={clearMessage}
             />
-            
+            <AddSubscriptionButton onSubAdd={handleSubscriptionAdded} />
             <table className="subscription-list">
                 <thead>
                     <tr>
